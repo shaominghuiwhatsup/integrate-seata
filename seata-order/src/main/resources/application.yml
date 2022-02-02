@@ -1,0 +1,50 @@
+server:
+  port: 9090
+spring:
+  application:
+    name: seata-order
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+    alibaba:
+      seata:
+        tx-service-group: seata-order-fescar-service-group #必须要和file.conf中一致
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name:  com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/order?serverTimezone=GMT%2B8
+      username: root
+      password: shao0526
+      initial-size: 2
+      max-active: 5
+      min-idle: 1
+      max-wait: 15000
+      test-on-borrow: true
+      validation-query: select 'x'
+      filter:
+        config:
+          enabled: true
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+
+seata:
+  enabled: true
+  application-id: seata-order
+  tx-service-group: seata-order-fescar-service-group # 要与服务端nacos-config.txt中service.vgroup_mapping的后缀对应
+  service:
+    vgroup_mapping:
+      seata-order-fescar-service-group: default
+  registry:
+    type: nacos
+    nacos:
+      application: serverAddr
+      server-addr: "127.0.0.1:8848"
+      group : "SEATA_GROUP"
+      namespace: ""
+  config:
+    type: nacos
+    nacos:
+      server-addr: "127.0.0.1:8848"
+      group : "SEATA_GROUP"
+      namespace: ""
