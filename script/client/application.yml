@@ -1,0 +1,53 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: seata-integration
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+    alibaba:
+      seata:
+        tx-service-group: seata-integration-fescar-service-group #必须要和file.conf中一致
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name:  com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/integration?serverTimezone=GMT%2B8
+      username: root
+      password: shao0526
+      initial-size: 2
+      max-active: 5
+      min-idle: 1
+      max-wait: 15000
+      test-on-borrow: true
+      validation-query: select 'x'
+      filter:
+        config:
+          enabled: true
+      ## 是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大。 默认为false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+#      connection-properties: config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAM0e4jFj2HOU3BTsfhie3DpSnYTlnzpC9MT1u+gW16Hn+3ScvCNe7nz/8KzqeMLEXXcgegj9uHDyI88XHvpyPD8CAwEAAQ==
+      #      connectionProperties: config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALk068fVgeFx6MWgyOzs4IC6d9h6SCp1WtDOAlXvEq68Xr2VCY4tCWk2yIfKS2Yp+hTvsEdYutjWFof7bvOVzV8CAwEAAQ==
+
+seata:
+  enabled: true
+  application-id: seata-integration
+  tx-service-group: seata-integration-fescar-service-group # 要与服务端nacos-config.txt中service.vgroup_mapping的后缀对应
+  service:
+    vgroup_mapping:
+      seata-integration-fescar-service-group: default
+  registry:
+    type: nacos
+    nacos:
+      application: serverAddr
+      server-addr: "192.168.126.150:8091"
+      group : "SEATA_GROUP"
+      namespace: ""
+  config:
+    type: nacos
+    nacos:
+      server-addr: "192.168.126.150:8091"
+      group : "SEATA_GROUP"
+      namespace: ""
