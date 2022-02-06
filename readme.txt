@@ -119,7 +119,7 @@ spring:
       server-addr: localhost:8848
     alibaba:
       seata:
-        tx-service-group: seata-integration-fescar-service-group # seata配置项，必须要和file.conf中一致
+        tx-service-group: seata-integration-fescar-service-group # seata配置项，必须要和file.conf中一致, 并且长度不要超过32，对应于server端连接的global_table中的transaction_service_group字段长度
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -165,3 +165,12 @@ seata:
       namespace: ""
 4.每个客户端新增文件：file.conf, registry.conf，具体参考script
 4.TM上加注解@GlobalTransactional
+
+客户端启动异常:
+1. 0304 register RM failed.
+  0101 can not connect to 192.168.126.150:8091 cause:can not register RM,err:can not connect to services-server.
+可能原因： 1.连接的服务端地址错误，注意观察报错中的url地址信息。2.服务端端口未开放
+ps：查看指定端口是否开放： firewall-cmd --query-port=8091/tcp
+查看防火墙状态 systemctl status firewalld
+开启防火墙 systemctl start firewalld  
+关闭防火墙 systemctl stop firewalld
