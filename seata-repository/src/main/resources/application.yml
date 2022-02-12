@@ -27,6 +27,15 @@ spring:
           enabled: true
       pool-prepared-statements: true
       max-open-prepared-statements: 20
+# springbootadmin cleint配置，暴露路径 ！！
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
 
 seata:
   enabled: true

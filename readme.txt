@@ -174,3 +174,25 @@ ps：查看指定端口是否开放： firewall-cmd --query-port=8091/tcp
 查看防火墙状态 systemctl status firewalld
 开启防火墙 systemctl start firewalld  
 关闭防火墙 systemctl stop firewalld
+
+=============================
+新增springboot-admin服务，用于监控应用运行情况
+工程： springboot-admin
+需要加入监控的client，需要引入依赖
+		<!-- 引入springboot-admin -->
+		<dependency>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-starter-client</artifactId>
+			<version>${spring-boot-admin.version}</version>
+		</dependency>
+同时application.yml中引入配置：
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+至此完成集成。
