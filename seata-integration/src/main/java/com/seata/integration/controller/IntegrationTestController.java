@@ -43,7 +43,7 @@ public class IntegrationTestController {
 
         feignOrderService.insert();
         feignRepositoryService.insert();
-        int i = 1/0;
+//        int i = 1/0;
         return "ok";
     }
 
