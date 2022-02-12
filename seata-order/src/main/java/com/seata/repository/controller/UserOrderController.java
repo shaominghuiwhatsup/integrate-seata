@@ -22,7 +22,7 @@ public class UserOrderController {
     @PostMapping("insert")
     public String insert() {
         UserOrderEntity entity = new UserOrderEntity();
-        entity.setId(1);
+//        entity.setId(1);
         entity.setOrderAmt(new BigDecimal(100));
         entity.setProductId(10);
         userOrderService.insert(entity);

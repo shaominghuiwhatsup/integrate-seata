@@ -3,6 +3,7 @@ package com.seata.integration.mapper.entity;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
 import lombok.Data;
 
 import java.net.Inet4Address;
@@ -14,7 +15,7 @@ import java.net.Inet4Address;
 @TableName("user_integration")
 @Data
 public class UserIntegrationEntity {
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Integer id;
     private Integer point;
     private String userId;

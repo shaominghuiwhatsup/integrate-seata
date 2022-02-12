@@ -2,6 +2,7 @@ package com.seata.repository.mapper.entity;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -13,7 +14,7 @@ import java.math.BigDecimal;
 @Data
 @TableName("user_order")
 public class UserOrderEntity {
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Integer id;
     private Integer productId;
     private BigDecimal orderAmt;

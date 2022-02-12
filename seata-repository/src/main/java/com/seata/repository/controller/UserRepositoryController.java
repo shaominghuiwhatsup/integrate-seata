@@ -21,7 +21,7 @@ public class UserRepositoryController {
     public String insert() {
 
         UserRepositoryEntity entity = new UserRepositoryEntity();
-        entity.setId(1);
+//        entity.setId(1);
         entity.setNum(4);
         entity.setProductId(190);
         userRepositoryService.insert(entity);

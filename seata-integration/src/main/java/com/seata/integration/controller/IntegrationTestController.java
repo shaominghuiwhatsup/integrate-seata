@@ -36,7 +36,7 @@ public class IntegrationTestController {
     @PostMapping("insert")
     public String insert() {
         UserIntegrationEntity entity = new UserIntegrationEntity();
-        entity.setId(1);
+//        entity.setId(1);
         entity.setPoint(1);
         entity.setUserId("555   55");
         userIntegrationService.insert(entity);
